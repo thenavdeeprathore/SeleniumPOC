@@ -3,5 +3,13 @@ This is a web automation framework, implemented using (Java + Selenium Webdriver
 
 Page Object Model (POM) design is used to make this code more readable, maintainable, and reusable.
 
-## Prerequisites:
+**_Prerequisite:_**
+* Java
+* Maven
+* Browsers (Chrome, Firefox, Safari, IE)
 
+**Steps to clone the project and execute the tests:**
+
+* `git clone https://github.com/thenavdeeprathore/SeleniumPOC.git`
+* `cd SeleniumPOC`
+* `mvn clean test`

@@ -17,6 +17,13 @@ public class CommonUtils extends TestBase {
     private static int timeout = 10;
     protected Actions actions;
 
+    /*      ----- Common Utils -----      */
+
+    /**
+     * Created by: Navdeep on 12/31/2019.
+     * This function returns the current Url of the page
+     * @return: current page Url
+     */
     public String getCurrentURL() {
         try {
             return driver.getCurrentUrl();
@@ -24,6 +31,69 @@ public class CommonUtils extends TestBase {
             throw new TestException(String.format("Current URL is: %s", driver.getCurrentUrl()));
         }
     }
+
+    /**
+     * Created by: Navdeep on 12/31/2019.
+     * This function returns the current title of the page
+     * @return: current page Title
+     */
+    public String getPageTitle() {
+        try {
+            return driver.getTitle();
+        } catch (Exception e) {
+            throw new TestException(String.format("Current page title is: %s", driver.getTitle()));
+        }
+    }
+
+    /**
+     * Created by: Navdeep on 12/31/2019.
+     * This function will navigate back to the previous visited page
+     */
+    public void navigateBack() {
+        try {
+            driver.navigate().back();
+        } catch (Exception e) {
+            System.out.println("FAILURE: Could not navigate back to previous page.");
+            throw new TestException("Could not navigate back to previous page.");
+        }
+    }
+
+    /**
+     * Created by: Navdeep on 12/31/2019.
+     * This function will navigate forward to the previous visited page
+     */
+    public void navigateForward() {
+        try {
+            driver.navigate().forward();
+        } catch (Exception e) {
+            System.out.println("FAILURE: Could not navigate forward to previous page.");
+            throw new TestException("Could not navigate forward to previous page.");
+        }
+    }
+
+    /**
+     * Created by: Navdeep on 12/31/2019.
+     * This function will refresh the current page
+     */
+    public void pageRefresh() {
+        try {
+            driver.navigate().refresh();
+        } catch (Exception e) {
+            System.out.println("FAILURE: Could not able to refresh the page.");
+            throw new TestException("Could not able to refresh the page.");
+        }
+    }
+
+    public void sleep(int seconds) {
+        try {
+            Thread.sleep(seconds);
+        } catch (InterruptedException e) {
+            throw new TestException("Could not able to sleep wait. "+e);
+        }
+    }
+
+
+    /*      ----- Common Utils using By locator -----      */
 
     public void waitForElementToBeVisible(By selector) {
         try {
@@ -34,29 +104,13 @@ public class CommonUtils extends TestBase {
         }
     }
 
-    public void clearField(WebElement element) {
+    public void waitForElementToBeClickable(By selector) {
         try {
-            element.clear();
-            waitForElementTextToBeEmpty(element);
+            wait = new WebDriverWait(driver, timeout);
+            wait.until(ExpectedConditions.elementToBeClickable(selector));
         } catch (Exception e) {
-            System.out.print(String.format("The following element could not be cleared: [%s]", element.getText()));
+            throw new TestException("The following element is not clickable: " + selector);
         }
-    }
-
-    public void waitForElementTextToBeEmpty(WebElement element) {
-        String text;
-        try {
-            text = element.getText();
-            int maxRetries = 10;
-            int retry = 0;
-            while ((text.length() >= 1) || (retry < maxRetries)) {
-                retry++;
-                text = element.getText();
-            }
-        } catch (Exception e) {
-            System.out.print(String.format("The following element could not be cleared: [%s]", element.getText()));
-        }
-
     }
 
     public WebElement getElement(By selector) {
@@ -70,7 +124,7 @@ public class CommonUtils extends TestBase {
 
     public void sendKeys(By selector, String value) {
         WebElement element = getElement(selector);
-        clearField(element);
+        clear(element);
         try {
             element.sendKeys(value);
         } catch (Exception e) {
@@ -100,14 +154,9 @@ public class CommonUtils extends TestBase {
         }
     }
 
-    public void waitForElementToBeClickable(By selector) {
-        try {
-            wait = new WebDriverWait(driver, timeout);
-            wait.until(ExpectedConditions.elementToBeClickable(selector));
-        } catch (Exception e) {
-            throw new TestException("The following element is not clickable: " + selector);
-        }
-    }
+
+
+    /*      ----- Common Utils using WebElement locator -----      */
 
     public void waitFor(ExpectedCondition<WebElement> condition, Integer timeout) {
         try {
@@ -119,30 +168,68 @@ public class CommonUtils extends TestBase {
         }
     }
 
-    public Boolean waitForVisibility(WebElement element, Integer... timeout) {
+    public Boolean waitForElementToBeVisible(WebElement element, Integer... timeout) {
         try {
             waitFor(ExpectedConditions.visibilityOf(element),
                     timeout.length > 0 ? timeout[0] : null);
         } catch (Exception e) {
-            System.out.println("The following element "+element+" is Not Visible: " + e.getMessage());
+            System.out.println("The following element is Not Visible: " + e.getMessage());
             return false;
         }
         return true;
     }
 
+    public Boolean waitForElementToBeClickable(WebElement element, Integer... timeout) {
+        try {
+            waitFor(ExpectedConditions.elementToBeClickable(element),
+                    timeout.length > 0 ? timeout[0] : null);
+        } catch (Exception e) {
+            System.out.println("The following element is Not Clickable: " + e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isDisplayed(WebElement element) {
+        try {
+            return element.isDisplayed();
+        } catch (Exception e) {
+            throw new TestException(String.format("The following element is not displayed: %s", e.getMessage()));
+        }
+    }
+
+    public String getText(WebElement element) {
+        try {
+            return element.getText();
+        } catch (Exception e) {
+            throw new TestException(String.format("The following element Text could not be fetched: %s", e.getMessage()));
+        }
+    }
+
+    /**
+     * Created by: Navdeep on 12/31/2019.
+     * This function will clear the element text from the input box
+     * @param element
+     */
+    public void clear(WebElement element) {
+        try {
+            element.clear();
+            waitForElementTextToBeEmpty(element);
+        } catch (Exception e) {
+            System.out.print(String.format("The following element could not be cleared: [%s]", element.getText()));
+        }
+    }
+
+    /**
+     * Created by: Navdeep on 12/31/2019.
+     * This function will click the element
+     * @param element
+     */
     public void click(WebElement element) {
         try {
             element.click();
         } catch (Exception e) {
-            System.out.println("The following element "+element+" is Not clickable: " + e);
-        }
-    }
-
-    public void clear(WebElement element) {
-        try {
-            element.clear();
-        } catch (Exception e) {
-            System.out.println("The following element "+element+" can't be cleared: " + e);
+            System.out.println(String.format("The following element is not clickable: [%s]" + e));
         }
     }
 
@@ -150,25 +237,24 @@ public class CommonUtils extends TestBase {
         try {
             element.sendKeys(inputText);
         } catch (Exception e) {
-            System.out.println("The following element "+element+" unable to write text "+inputText+": " + e);
+            System.out.println(String.format("The following element is unable to write text: [%s]"+inputText+" : " + e));
         }
     }
 
-    public String getPageTitle() {
+    public void waitForElementTextToBeEmpty(WebElement element) {
+        String text;
         try {
-            return driver.getTitle();
+            text = element.getText();
+            int maxRetries = 10;
+            int retry = 0;
+            while ((text.length() >= 1) || (retry < maxRetries)) {
+                retry++;
+                text = element.getText();
+            }
         } catch (Exception e) {
-            throw new TestException(String.format("Current page title is: %s", driver.getTitle()));
+            System.out.print(String.format("The following element could not be cleared: [%s]", element.getText()));
         }
-    }
 
-    public void sleep(int seconds) {
-        try {
-            Thread.sleep(seconds);
-        } catch (InterruptedException e) {
-            System.out.println("Caught exception during sleep wait "+e);
-        }
     }
-
 
 }
