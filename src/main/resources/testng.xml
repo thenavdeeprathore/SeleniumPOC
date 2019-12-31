@@ -3,12 +3,17 @@
 
 <suite name="Smoke" parallel="none" preserve-order="true">
 
+    <listeners>
+        <listener class-name="listeners.ExtentReportListener" />
+    </listeners>
+
     <test name="SmokeTests" enabled="true">
         <classes>
 
             <class name="authentication.Login">
                 <methods>
                     <include name="testHomeTitle" />
+                    <include name="testUrlProtocol" />
                 </methods>
             </class>
 

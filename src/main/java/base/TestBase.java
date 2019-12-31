@@ -1,5 +1,9 @@
 package base;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.configuration.ChartLocation;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 import constants.Constants;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,6 +21,9 @@ import org.testng.annotations.BeforeSuite;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -28,17 +35,20 @@ public class TestBase {
     protected static Properties prop = new Properties();
     protected static FileInputStream fis;
     protected static String browserNameVersion;
+    public static final String REPORT_FILE_NAME = "QAReportSmoke.html";
+    public static final String URL = prop.getProperty("url");
 
     /**
      * This function is used for doing web driver setup.
      */
-    @BeforeSuite(alwaysRun=true)
-    public static void setup () {
+    @BeforeSuite(alwaysRun = true)
+    public static void setup() {
         System.out.println("# Setup.");
         loadProperties(Constants.configPropertiesFilePath);
         initializeDrivers(Constants.operatingSystemName, prop.getProperty("browser").toUpperCase());
         initializePageLoadTimeout(Constants.pageLoadTimeout);
         navigateToURL(prop.getProperty("url"));
+        initializeReport();
     }
 
     /**
@@ -54,6 +64,7 @@ public class TestBase {
     /**
      * Created by: Navdeep on 12/30/2019.
      * This function loads the config properties file
+     *
      * @param filePath: The path of your config.properties file
      */
     public static void loadProperties(String filePath) {
@@ -78,7 +89,8 @@ public class TestBase {
     /**
      * Created by: Navdeep on 12/30/2019.
      * This function initialize various browser drivers on different operating systems
-     * @param OsType: Which Operating System you want for are running automation test
+     *
+     * @param OsType:      Which Operating System you want for are running automation test
      * @param browserType: Which Browser Type you want for running automation test
      */
     public static void initializeDrivers(String OsType, String browserType) {
@@ -221,6 +233,7 @@ public class TestBase {
     /**
      * Created by: Navdeep on 12/30/2019.
      * This function navigates to the URL in the respective launched browser
+     *
      * @param url: Enter your URL here
      */
     public static void navigateToURL(String url) {
@@ -234,4 +247,30 @@ public class TestBase {
         }
     }
 
+    public static void initializeReport() {
+        Path path = Paths.get(Constants.reportOutputFolder);
+        // if directory exists?
+        if (!Files.exists(path)) {
+            try {
+                Files.createDirectories(path);
+            } catch (IOException e) {
+                System.out.println("Fail to create a directory. " + e);
+            }
+        }
+        Constants.htmlReporter = new ExtentHtmlReporter(Constants.reportOutputFolder + REPORT_FILE_NAME);
+        Constants.htmlReporter.config().setDocumentTitle("Amazon Automation Report");
+        Constants.htmlReporter.config().setReportName("Automation Test Results");
+        Constants.htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
+        Constants.htmlReporter.config().setTheme(Theme.STANDARD);
+        Constants.extent = new ExtentReports();
+        Constants.extent.attachReporter(Constants.htmlReporter);
+        Constants.extent.setReportUsesManualConfiguration(true);
+
+        Constants.extent.setSystemInfo("OS", Constants.operatingSystemName);
+        Constants.extent.setSystemInfo("Browser Name", Constants.browserName);
+        Constants.extent.setSystemInfo("Browser Version", Constants.browserVersion);
+        Constants.extent.setSystemInfo("URL", URL);
+        Constants.extent.setSystemInfo("Selenium Version", "3.141.5");
+        Constants.extent.setSystemInfo("TestNG Version", "7.1.0");
+    }
 }

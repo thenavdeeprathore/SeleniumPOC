@@ -1,5 +1,9 @@
 package constants;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+
 public class Constants {
 
     public static final int pageLoadTimeout =40;
@@ -14,5 +18,11 @@ public class Constants {
     public static final String operatingSystemName = System.getProperty("os.name").toUpperCase();
     public static String browserName;
     public static String browserVersion;
+
+    public static ExtentHtmlReporter htmlReporter;
+    public static ExtentReports extent;
+    public static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
+    public static ExtentTest logger;
+    public static final String reportOutputFolder = "./report/";
 
 }

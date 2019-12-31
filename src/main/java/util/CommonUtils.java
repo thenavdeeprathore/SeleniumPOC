@@ -1,15 +1,18 @@
 package util;
 
 import base.TestBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import com.aventstack.extentreports.Status;
+import constants.Constants;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.TestException;
+
+import java.io.File;
+import java.io.IOException;
 
 public class CommonUtils extends TestBase {
 
@@ -92,6 +95,22 @@ public class CommonUtils extends TestBase {
         }
     }
 
+    public String getScreenshot() {
+        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        String path = System.getProperty("user.dir") + "/screenshots/" + System.currentTimeMillis() + ".png";
+        File destination = new File(path);
+        try {
+            FileUtils.copyFile(src, destination);
+        } catch (IOException e) {
+            System.out.println("Capture Failed " + e);
+        }
+        return path;
+    }
+
+    public static void logInfo(String message) {
+        System.out.println(message);
+        Constants.test.get().log(Status.INFO, message);
+    }
 
     /*      ----- Common Utils using By locator -----      */
 

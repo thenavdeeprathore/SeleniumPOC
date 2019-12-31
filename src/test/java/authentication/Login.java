@@ -10,10 +10,19 @@ public class Login extends CommonUtils {
     public void testHomeTitle() {
         String HomePageTitle = "Amazon.com: Online Shopping for Electronics, Apparel, Computers, Books, DVDs & more";
         String ActualTitle = getPageTitle();
-        System.out.println("Page title found: "+ActualTitle);
+        logInfo("Page title found: "+ActualTitle);
 
-        Assert.assertEquals(ActualTitle, HomePageTitle, "Amazon home page title incorrect");
-        System.out.println("Amazon home page title is matched successfully");
+        Assert.assertEquals(ActualTitle, HomePageTitle, "Amazon home page title is incorrect");
+        logInfo("Amazon home page title is matched successfully");
+    }
+
+    @Test(alwaysRun = true, description = "Validate URL contains https:")
+    public void testUrlProtocol() {
+        String CurrentUrl = getCurrentURL();
+        logInfo("Current URL: "+CurrentUrl);
+
+        Assert.assertTrue(CurrentUrl.contains("https:"), "URL protocol https is not present");
+        logInfo("Current URL is secured and contains https: protocol");
     }
 
 }
