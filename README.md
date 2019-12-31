@@ -8,6 +8,24 @@ Page Object Model (POM) design is used to make this code more readable, maintain
 * Maven
 * Browsers (Chrome, Firefox, Safari, IE)
 
+**Framework Features:**
+* Config for Operating Systems:
+    * Mac
+    * Windows
+* Config for various browsers for latest browser versions:
+    * Mac
+        * Chrome
+        * Firefox
+        * Safari
+        * Headless Chrome
+    * Windows
+        * Chrome
+        * Firefox
+        * IE
+        * Headless Chrome
+
+
+
 **Steps to clone the project and execute the tests:**
 
 * `git clone https://github.com/thenavdeeprathore/SeleniumPOC.git`

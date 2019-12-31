@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.testng.TestException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -173,14 +174,12 @@ public class TestBase {
                         System.out.println("Problem initializing drivers for FIREFOX; Terminating Execution. " + e);
                         System.exit(0);
                     }
-                } else if ("IE".equals(browserType)) {
+                } else if ("SAFARI".equals(browserType)) {
                     try {
-                        System.setProperty("webdriver.ie.driver",
-                                Constants.sProjectDir + "/drivers/IEDriverServer");
-                        driver = new InternetExplorerDriver();
-                        System.out.println("Drivers Launched for IE");
+                        driver = new SafariDriver();
+                        System.out.println("Drivers Launched for Safari");
                     } catch (Exception e) {
-                        System.out.println("Problem initializing drivers for IE; Terminating Execution. " + e);
+                        System.out.println("Problem initializing drivers for Safari; Terminating Execution. " + e);
                         System.exit(0);
                     }
                 } else if ("HEADLESS".equals(browserType)) {

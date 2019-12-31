@@ -15,13 +15,13 @@ public class SignInPage extends CommonUtils {
 
     public void enterUsername(String userName){
         System.out.println("SIGNIN_PAGE: Entering username: " + userName);
-        waitForVisibility(login.userEmail, 10);
+        waitForElementToBeVisible(login.userEmail, 10);
         sendKeys(login.userEmail, userName);
     }
 
     public void enterPassword(String password){
         System.out.println("SIGNIN_PAGE: Entering password.");
-        waitForVisibility(login.userPassword);
+        waitForElementToBeVisible(login.userPassword);
         sendKeys(login.userPassword, password);
     }
 
