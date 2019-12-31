@@ -95,6 +95,11 @@ public class CommonUtils extends TestBase {
         }
     }
 
+    /**
+     * Created by: Navdeep on 01/01/2020.
+     * This function takes screenshots of the web page
+     * @return path of the screenshot file
+     */
     public String getScreenshot() {
         File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         String path = System.getProperty("user.dir") + "/screenshots/" + System.currentTimeMillis() + ".png";
@@ -107,6 +112,11 @@ public class CommonUtils extends TestBase {
         return path;
     }
 
+    /**
+     * Created by: Navdeep on 01/01/2020.
+     * This function logs message both on terminal as well as in the extent reports.
+     * @param message
+     */
     public static void logInfo(String message) {
         System.out.println(message);
         Constants.test.get().log(Status.INFO, message);

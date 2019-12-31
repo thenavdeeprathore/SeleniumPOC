@@ -23,6 +23,8 @@ Page Object Model (POM) design is used to make this code more readable, maintain
         * Firefox
         * IE
         * Headless Chrome
+* Config listeners
+    * Extent Reports
 
 
 

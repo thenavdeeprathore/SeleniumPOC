@@ -225,6 +225,11 @@ public class TestBase {
         }
     }
 
+    /**
+     * Created by: Navdeep on 01/01/2020.
+     * This function waits for the page to load for the given time
+     * @param: Time to wait
+     */
     public static void initializePageLoadTimeout(int pageLoadTimeout) {
         driver.manage().timeouts().pageLoadTimeout(pageLoadTimeout, TimeUnit.SECONDS);
         System.out.println("Page Load Timeout Set is: " + pageLoadTimeout + " Seconds");
@@ -247,6 +252,10 @@ public class TestBase {
         }
     }
 
+    /**
+     * Created by: Navdeep on 01/01/2020.
+     * This function initializes Extent Reports to generate html reports.
+     */
     public static void initializeReport() {
         Path path = Paths.get(Constants.reportOutputFolder);
         // if directory exists?
