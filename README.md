@@ -37,4 +37,4 @@ Page Object Model (POM) design is used to make this code more readable, maintain
 
 * `git clone https://github.com/thenavdeeprathore/SeleniumPOC.git`
 * `cd SeleniumPOC`
-* `mvn clean test`
+* `mvn clean install -Dsurefire.suiteXmlFiles=src/main/resources/testng.xml`
