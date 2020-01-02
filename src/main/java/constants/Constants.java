@@ -18,11 +18,12 @@ public class Constants {
     public static final String operatingSystemName = System.getProperty("os.name").toUpperCase();
     public static String browserName;
     public static String browserVersion;
+    public static String jsbrowserNameVersion;
 
     public static ExtentHtmlReporter htmlReporter;
     public static ExtentReports extent;
     public static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
-    public static ExtentTest logger;
     public static final String reportOutputFolder = "./report/";
+    public static final String REPORT_FILE_NAME = "QAReportSmoke.html";
 
 }

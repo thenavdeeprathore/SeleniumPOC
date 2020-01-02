@@ -1,4 +1,4 @@
-package util;
+package utilities;
 
 import base.TestBase;
 import com.aventstack.extentreports.Status;
@@ -22,6 +22,41 @@ public class CommonUtils extends TestBase {
 
     /*      ----- Common Utils -----      */
 
+    /**
+     * Created by: Navdeep on 02/01/2020.
+     * This function is used to kill all the active browser driver instances.
+     * @throws IOException
+     */
+    public static void killBrowserDriverInstances() throws IOException {
+        System.out.println("Killing all the open driver instances !!!");
+        if(Constants.operatingSystemName.startsWith("MAC")) {
+            if (Constants.browserName.equalsIgnoreCase("Chrome")) {
+                Runtime.getRuntime().exec("ps auxww | grep -i 'chromedriver' | grep -v grep | awk '{ print $2 }' | xargs kill -9");
+                System.out.println("Chrome Driver instances closed on "+Constants.operatingSystemName);
+            } else if (Constants.browserName.equalsIgnoreCase("Firefox")) {
+                Runtime.getRuntime().exec("ps auxww | grep -i 'geckodriver' | grep -v grep | awk '{ print $2 }' | xargs kill -9");
+                System.out.println("Firfox Driver instances closed on "+Constants.operatingSystemName);
+            } else {
+                System.out.println("Drivers not available for: "+Constants.operatingSystemName);
+            }
+        } else if(Constants.operatingSystemName.startsWith("WINDOWS")){
+            if (Constants.browserName.equalsIgnoreCase("Chrome")) {
+                Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe /T");
+                System.out.println("Chrome Driver instances closed on "+Constants.operatingSystemName);
+            } else if (Constants.browserName.equalsIgnoreCase("Firefox")) {
+                Runtime.getRuntime().exec("taskkill /F /IM geckodriver.exe /T");
+                System.out.println("Firfox Driver instances closed on "+Constants.operatingSystemName);
+            } else if (prop.getProperty("BROWSER").equalsIgnoreCase("IE")) {
+                Runtime.getRuntime().exec("taskkill /F /IM IEDriverServer.exe /T");
+                System.out.println("IE Driver instances closed on "+Constants.operatingSystemName);
+            } else {
+                System.out.println("Drivers not available for: "+Constants.operatingSystemName);
+            }
+        } else {
+            System.out.println("Automation suite doesn't support this OS: "+Constants.operatingSystemName);
+        }
+    }
+    
     /**
      * Created by: Navdeep on 12/31/2019.
      * This function returns the current Url of the page

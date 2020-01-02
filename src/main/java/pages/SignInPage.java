@@ -2,9 +2,9 @@ package pages;
 
 import locators.SignInLocators;
 import org.openqa.selenium.support.PageFactory;
-import util.CommonUtils;
+import utilities.TestUtil;
 
-public class SignInPage extends CommonUtils {
+public class SignInPage extends TestUtil {
 
     public SignInLocators login;
 

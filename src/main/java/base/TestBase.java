@@ -15,8 +15,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.TestException;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,32 +32,6 @@ public class TestBase {
     protected static WebDriver driver;
     protected static Properties prop = new Properties();
     protected static FileInputStream fis;
-    protected static String browserNameVersion;
-    public static final String REPORT_FILE_NAME = "QAReportSmoke.html";
-    public static final String URL = prop.getProperty("url");
-
-    /**
-     * This function is used for doing web driver setup.
-     */
-    @BeforeSuite(alwaysRun = true)
-    public static void setup() {
-        System.out.println("# Setup.");
-        loadProperties(Constants.configPropertiesFilePath);
-        initializeDrivers(Constants.operatingSystemName, prop.getProperty("browser").toUpperCase());
-        initializePageLoadTimeout(Constants.pageLoadTimeout);
-        navigateToURL(prop.getProperty("url"));
-        initializeReport();
-    }
-
-    /**
-     * This function is used to quit the driver instance.
-     */
-    @AfterSuite(alwaysRun = true)
-    public void teardown() {
-        System.out.println("# Teardown.");
-        if (driver != null)
-            driver.quit();
-    }
 
     /**
      * Created by: Navdeep on 12/30/2019.
@@ -151,11 +123,6 @@ public class TestBase {
                 } else {
                     System.out.println("Browser name: " + browserType + " is Invalid");
                 }
-                Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
-                Constants.browserName = cap.getBrowserName().toUpperCase();
-                Constants.browserVersion = cap.getVersion();
-                System.out.println("Browser Name: " + Constants.browserName);
-                System.out.println("Browser Version: " + Constants.browserVersion);
             } else if (Constants.operatingSystemName.startsWith("MAC")) {
                 System.out.println("Operating System: " + Constants.operatingSystemName);
                 if ("CHROME".equals(browserType)) {
@@ -205,20 +172,13 @@ public class TestBase {
                 } else {
                     System.out.println("Browser name: " + browserType + " is Invalid");
                 }
-                Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
-                Constants.browserName = cap.getBrowserName().toUpperCase();
-                Constants.browserVersion = cap.getVersion();
-                System.out.println("Browser Name: " + Constants.browserName);
-                System.out.println("Browser Version: " + Constants.browserVersion);
             } else {
                 System.out.println("Currently we don't support the automation for this Operating System: " + Constants.operatingSystemName);
             }
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            browserNameVersion = js.executeScript("return navigator.sayswho= (function(){ var ua= navigator.userAgent, tem, M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\\/))\\/?\\s*(\\d+)/i) || [];if(/trident/i.test(M[1])){tem=  /\\\\brv[ :]+(\\d+)/g.exec(ua) || [];return 'IE '+(tem[1] || '');}if(M[1]=== 'Chrome'){tem= ua.match(/\\\\b(OPR|Edge)\\/(\\d+)/);if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera');}M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];if((tem= ua.match(/version\\/(\\d+)/i))!= null) M.splice(1, 1, tem[1]);return M.join(' ');})();").toString().toUpperCase();
-            driver.manage().deleteAllCookies();
-            System.out.println("Deleted All Cookies");
-            driver.manage().window().maximize();
-            System.out.println("Browser Window is Maximized");
+            getRemoteWebDriverBrowserCapabilities();
+            javascriptBrowserVersion();
+            deleteAllCookies();
+            maximizeBrowserWindow();
         } catch (Exception e) {
             System.out.println("Exception caught while initializing Drivers on OS: " + Constants.operatingSystemName + " for Browser: "
                     + Constants.browserName + " " + Constants.browserVersion + " " + e);
@@ -226,9 +186,49 @@ public class TestBase {
     }
 
     /**
+     * Created by: Navdeep on 02/01/2020.
+     * This function is used to get the RemoteWebDriver Capabilities for the Browser Name and Version.
+     */
+    public static void getRemoteWebDriverBrowserCapabilities() {
+        Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
+        Constants.browserName = cap.getBrowserName().toUpperCase();
+        Constants.browserVersion = cap.getVersion();
+        System.out.println("Browser Name: " + Constants.browserName);
+        System.out.println("Browser Version: " + Constants.browserVersion);
+    }
+
+    /**
+     * Created by: Navdeep on 02/01/2020.
+     * This function is used to display the launched Browser Name and Browser Version.
+     */
+    public static void javascriptBrowserVersion() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Constants.jsbrowserNameVersion = js.executeScript("return navigator.sayswho= (function(){ var ua= navigator.userAgent, tem, M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\\/))\\/?\\s*(\\d+)/i) || [];if(/trident/i.test(M[1])){tem=  /\\\\brv[ :]+(\\d+)/g.exec(ua) || [];return 'IE '+(tem[1] || '');}if(M[1]=== 'Chrome'){tem= ua.match(/\\\\b(OPR|Edge)\\/(\\d+)/);if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera');}M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];if((tem= ua.match(/version\\/(\\d+)/i))!= null) M.splice(1, 1, tem[1]);return M.join(' ');})();").toString().toUpperCase();
+        System.out.println("Browser Name and Version: "+Constants.jsbrowserNameVersion);
+    }
+
+    /**
+     * Created by: Navdeep on 02/01/2020.
+     * This function is used to delete all the cookies immediately at the browser launch.
+     */
+    public static void deleteAllCookies() {
+        driver.manage().deleteAllCookies();
+        System.out.println("Deleted All Cookies");
+    }
+
+    /**
+     * Created by: Navdeep on 02/01/2020.
+     * This function is used to maximize the launched browser.
+     */
+    public static void maximizeBrowserWindow() {
+        driver.manage().window().maximize();
+        System.out.println("Browser Window is Maximized");
+    }
+
+    /**
      * Created by: Navdeep on 01/01/2020.
-     * This function waits for the page to load for the given time
-     * @param: Time to wait
+     * This function is used to wait until page gets loaded in the given time.
+     * @param pageLoadTimeout: Time to wait for page to be loaded
      */
     public static void initializePageLoadTimeout(int pageLoadTimeout) {
         driver.manage().timeouts().pageLoadTimeout(pageLoadTimeout, TimeUnit.SECONDS);
@@ -237,9 +237,9 @@ public class TestBase {
 
     /**
      * Created by: Navdeep on 12/30/2019.
-     * This function navigates to the URL in the respective launched browser
+     * This function navigates to the URL in the respective launched browser.
      *
-     * @param url: Enter your URL here
+     * @param url: Enter your site URL here
      */
     public static void navigateToURL(String url) {
         try {
@@ -266,7 +266,7 @@ public class TestBase {
                 System.out.println("Fail to create a directory. " + e);
             }
         }
-        Constants.htmlReporter = new ExtentHtmlReporter(Constants.reportOutputFolder + REPORT_FILE_NAME);
+        Constants.htmlReporter = new ExtentHtmlReporter(Constants.reportOutputFolder + Constants.REPORT_FILE_NAME);
         Constants.htmlReporter.config().setDocumentTitle("Amazon Automation Report");
         Constants.htmlReporter.config().setReportName("Automation Test Results");
         Constants.htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
@@ -278,7 +278,6 @@ public class TestBase {
         Constants.extent.setSystemInfo("OS", Constants.operatingSystemName);
         Constants.extent.setSystemInfo("Browser Name", Constants.browserName);
         Constants.extent.setSystemInfo("Browser Version", Constants.browserVersion);
-        Constants.extent.setSystemInfo("URL", URL);
         Constants.extent.setSystemInfo("Selenium Version", "3.141.5");
         Constants.extent.setSystemInfo("TestNG Version", "7.1.0");
     }

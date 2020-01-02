@@ -2,9 +2,9 @@ package authentication;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import util.CommonUtils;
+import utilities.TestUtil;
 
-public class Login extends CommonUtils {
+public class Login extends TestUtil {
 
     @Test(alwaysRun = true, description = "Validate Amazon Home Page Title")
     public void testHomeTitle() {
