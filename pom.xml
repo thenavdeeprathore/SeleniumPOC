@@ -44,6 +44,14 @@
                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
 
+                    <systemPropertyVariables>
+                        <propertyName>${url}</propertyName>
+                    </systemPropertyVariables>
+                    <systemProperties>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <propertyName>${browser}</propertyName>
+                    </systemProperties>
+
                     <!-- <properties> -->
                     <!-- <browser>${browser}</browser> -->
                     <!-- <url>${url}</url> -->

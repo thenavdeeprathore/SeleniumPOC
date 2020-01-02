@@ -15,6 +15,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.TestException;
+import org.testng.annotations.Parameters;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -241,6 +242,7 @@ public class TestBase {
      *
      * @param url: Enter your site URL here
      */
+    @Parameters({"url"})
     public static void navigateToURL(String url) {
         try {
             System.out.println("Navigating to: " + url);

@@ -3,6 +3,7 @@ package utilities;
 import constants.Constants;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 import pages.HomePage;
 import pages.SignInPage;
 
@@ -17,12 +18,15 @@ public class TestUtil extends CommonUtils {
      * Created by: Navdeep on 02/01/2020.
      * This function is used for doing web driver setup.
      */
+//    @Parameters({"url", "browser"})
     @BeforeSuite(alwaysRun = true)
     public static void setup() {
         System.out.println("# Setup.");
         loadProperties(Constants.configPropertiesFilePath);
+//        initializeDrivers(Constants.operatingSystemName, browser.toUpperCase());    //Give browser name through command line
         initializeDrivers(Constants.operatingSystemName, prop.getProperty("browser").toUpperCase());
         initializePageLoadTimeout(Constants.pageLoadTimeout);
+//        navigateToURL(url); //Give url through command line
         navigateToURL(prop.getProperty("url"));
         initializeReport();
         initializePages();
