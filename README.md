@@ -1,9 +1,9 @@
-## **Selenium Java TDD Automation Framework POC : Amazon.com** 
+## Selenium Java TDD Automation POC: www.amazon.com
 This is a web automation framework, implemented using (Java + Selenium Webdriver, TestNG & Maven).
 
 Page Object Model (POM) design is used to make this code more readable, maintainable, and reusable.
 
-## **_Prerequisite:_**
+## _Prerequisite:_
 * Java
 * Maven
 * Browsers (Chrome, Firefox, Safari, IE)
@@ -24,11 +24,16 @@ Page Object Model (POM) design is used to make this code more readable, maintain
         * IE
         * Headless Chrome
 * Config listeners
-    * Extent Reports
+    * ITestListener
+    * IInvokedMethodListener
+    * ExtentReportListener
+* Config to generate overridden HTML reports per Test Suite wise.
+* Config to kill all launched browser instances.
+* Config to get screenshots for the failed test cases.
 
 
 
-## **Steps to clone the project and execute the tests:**
+## Steps to clone the project and execute the tests:
 
 * `git clone https://github.com/thenavdeeprathore/SeleniumPOC.git`
 * `cd SeleniumPOC`
