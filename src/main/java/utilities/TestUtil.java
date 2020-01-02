@@ -3,10 +3,15 @@ package utilities;
 import constants.Constants;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import pages.HomePage;
+import pages.SignInPage;
 
 import java.io.IOException;
 
 public class TestUtil extends CommonUtils {
+
+    protected static SignInPage signInPage;
+    protected static HomePage homePage;
 
     /**
      * Created by: Navdeep on 02/01/2020.
@@ -20,6 +25,7 @@ public class TestUtil extends CommonUtils {
         initializePageLoadTimeout(Constants.pageLoadTimeout);
         navigateToURL(prop.getProperty("url"));
         initializeReport();
+        initializePages();
     }
 
     /**
@@ -36,6 +42,15 @@ public class TestUtil extends CommonUtils {
         } catch (IOException e) {
             System.out.println("Failure: while killing driver instances. "+e);
         }
+    }
+
+    /**
+     * Created by: Navdeep on 02/01/2020.
+     * This function is used to initialize page objects.
+     */
+    public static void initializePages() {
+        signInPage = new SignInPage();
+        homePage = new HomePage();
     }
 
 }

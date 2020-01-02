@@ -28,7 +28,7 @@ Page Object Model (POM) design is used to make this code more readable, maintain
     * IInvokedMethodListener
     * ExtentReportListener
 * Config to generate overridden HTML reports per Test Suite wise.
-* Config to kill all launched browser instances.
+* Config to kill all the launched browser instances.
 * Config to get screenshots for the failed test cases.
 
 
