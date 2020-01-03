@@ -7,6 +7,8 @@ public class SignInLocators {
 
     @FindBy(css = "#ap_email")
     public WebElement userEmail;
+    @FindBy(id = "continue")
+    public WebElement continueButton;
     @FindBy(css = "#ap_password")
     public WebElement userPassword;
     @FindBy(css = "#signInSubmit")

@@ -33,7 +33,12 @@ Page Object Model (POM) design is used to make this code more readable, maintain
 * Config for BrowserStack.
 * Config for Code Coverage using Jacoco.
 
-
+## Amazon Site Test Repository:
+* [Login](src/test/java/authentication/Login.java)
+    * testHomeTitle
+    * testUrlProtocol
+    * testNavigateToSignIn
+    * testSignIn
 
 ## Steps to clone the project and execute the tests:
 

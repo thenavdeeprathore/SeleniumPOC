@@ -206,8 +206,7 @@ public class CommonUtils extends TestBase {
         }
     }
 
-    public void scrollToThenClick(By selector) {
-        WebElement element = driver.findElement(selector);
+    public void scrollToThenClick(WebElement element) {
         actions = new Actions(driver);
         try {
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
@@ -262,7 +261,12 @@ public class CommonUtils extends TestBase {
         }
     }
 
-    public String getText(WebElement element) {
+    /**
+     * Created by: Navdeep on 03/01/2020.
+     * @param element
+     * @return
+     */
+    public String getElementText(WebElement element) {
         try {
             return element.getText();
         } catch (Exception e) {

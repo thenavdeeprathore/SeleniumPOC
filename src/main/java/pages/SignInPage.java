@@ -19,6 +19,11 @@ public class SignInPage extends TestUtil {
         sendKeys(login.userEmail, userName);
     }
 
+    public void clickContinueButton(){
+        System.out.println("SIGNIN_PAGE: Clicking the [CONTINUE] button.\n");
+        click(login.continueButton);
+    }
+
     public void enterPassword(String password){
         System.out.println("SIGNIN_PAGE: Entering password.");
         waitForElementToBeVisible(login.userPassword);
@@ -28,5 +33,12 @@ public class SignInPage extends TestUtil {
     public void clickSignInButton(){
         System.out.println("SIGNIN_PAGE: Clicking the [SIGN_IN] button.\n");
         click(login.userSignInButton);
+    }
+
+    public void loginAs(String username, String password){
+        signInPage.enterUsername(username);
+        signInPage.clickContinueButton();
+        signInPage.enterPassword(password);
+        signInPage.clickSignInButton();
     }
 }
