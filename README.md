@@ -23,7 +23,7 @@ Page Object Model (POM) design is used to make this code more readable, maintain
         * Firefox
         * IE
         * Headless Chrome
-* Config listeners
+* Config listeners:
     * ITestListener
     * IInvokedMethodListener
     * ExtentReportListener
@@ -31,7 +31,7 @@ Page Object Model (POM) design is used to make this code more readable, maintain
 * Config to kill all the launched browser instances.
 * Config to get screenshots for the failed test cases.
 * Config for BrowserStack.
-* Config for Code Coverage.
+* Config for Code Coverage using Jacoco.
 
 
 
@@ -40,4 +40,6 @@ Page Object Model (POM) design is used to make this code more readable, maintain
 * `git clone https://github.com/thenavdeeprathore/SeleniumPOC.git`
 * `cd SeleniumPOC`
 * `mvn clean install -Dsurefire.suiteXmlFiles=src/main/resources/testng.xml`
+    * `# view test execution report at ‘report/QAReportSmoke.html’`
+    * `# view code coverage report at ‘target/site/jacoco/index.html’`
 
