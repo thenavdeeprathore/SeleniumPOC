@@ -2,7 +2,7 @@ package utilities;
 
 import base.TestBase;
 import com.aventstack.extentreports.Status;
-import constants.Constants;
+import base.Constants;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;

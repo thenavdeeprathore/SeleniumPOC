@@ -19,7 +19,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
-import constants.Constants;
+import base.Constants;
 import utilities.CommonUtils;
 
 public class ExtentReportListener extends CommonUtils implements ITestListener, IInvokedMethodListener {

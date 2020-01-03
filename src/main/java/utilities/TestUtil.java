@@ -1,6 +1,6 @@
 package utilities;
 
-import constants.Constants;
+import base.Constants;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;

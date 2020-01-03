@@ -4,7 +4,6 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-import constants.Constants;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.TestException;
@@ -20,6 +20,8 @@ import org.testng.annotations.Parameters;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -28,7 +30,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-public class TestBase {
+public class TestBase extends Constants {
 
     protected static WebDriver driver;
     protected static Properties prop = new Properties();
@@ -283,4 +285,89 @@ public class TestBase {
         Constants.extent.setSystemInfo("Selenium Version", "3.141.5");
         Constants.extent.setSystemInfo("TestNG Version", "7.1.0");
     }
+
+    /**
+     * Created by: Navdeep on 03/01/2020.
+     * This function is used to initialize drivers for different Browsers and Versions in the BrowserStack.
+     * @param browserType
+     */
+    public static void initializeBrowserStack(String browserType) {
+        switch (browserType) {
+            case "CHROME":
+                try {
+                    DesiredCapabilities capabilities = new DesiredCapabilities();
+                    capabilities.setCapability("os", "OS X");
+                    capabilities.setCapability("os_version", "Mojave");
+                    capabilities.setCapability("browser", "Chrome");
+                    capabilities.setCapability("browser_version", "75.0");
+                    capabilities.setCapability("browserstack.debug", "true");
+                    capabilities.setCapability("resolution", "1280x960");
+                    capabilities.setCapability("name", "Test Suite: " + "Smoke");
+
+                    try {
+                        driver = new RemoteWebDriver(new URL(browserstack_URL), capabilities);
+                        maximizeBrowserWindow();
+                    } catch (MalformedURLException e) {
+                        System.out.println("Invalid BrowserStack grid URL " + e);
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("Problem initializing drivers for CHROME; Terminating Execution. " + e);
+                    System.exit(0);
+                }
+                getRemoteWebDriverBrowserCapabilities();
+                break;
+            case "FIREFOX":
+                try {
+                    DesiredCapabilities capabilities = new DesiredCapabilities();
+                    capabilities.setCapability("os", "OS X");
+                    capabilities.setCapability("os_version", "Mojave");
+                    capabilities.setCapability("browser", "Firefox");
+                    capabilities.setCapability("browser_version", "66.0");
+                    capabilities.setCapability("browserstack.debug", "true");
+                    capabilities.setCapability("resolution", "1280x960");
+                    capabilities.setCapability("name", "Test Suite: " + "Smoke");
+
+                    try {
+                        driver = new RemoteWebDriver(new URL(browserstack_URL), capabilities);
+                        maximizeBrowserWindow();
+                    } catch (MalformedURLException e) {
+                        System.out.println("Invalid BrowserStack grid URL " + e);
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("Problem initializing drivers for CHROME; Terminating Execution. " + e);
+                    System.exit(0);
+                }
+                getRemoteWebDriverBrowserCapabilities();
+                break;
+            case "SAFARI":
+                try {
+                    DesiredCapabilities capabilities = new DesiredCapabilities();
+                    capabilities.setCapability("os", "OS X");
+                    capabilities.setCapability("os_version", "Mojave");
+                    capabilities.setCapability("browser", "Safari");
+                    capabilities.setCapability("browser_version", "12.1");
+                    capabilities.setCapability("browserstack.debug", "true");
+                    capabilities.setCapability("resolution", "1280x960");
+                    capabilities.setCapability("name", "Test Suite: " + "Smoke");
+
+                    try {
+                        driver = new RemoteWebDriver(new URL(Constants.browserstack_URL), capabilities);
+                        maximizeBrowserWindow();
+                    } catch (MalformedURLException e) {
+                        System.out.println("Invalid BrowserStack grid URL " + e);
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("Problem initializing drivers for CHROME; Terminating Execution. " + e);
+                    System.exit(0);
+                }
+                getRemoteWebDriverBrowserCapabilities();
+                break;
+            default:
+                System.out.println("Browser name: " + browserType + " is Invalid");
+        }
+    }
+
 }
