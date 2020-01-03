@@ -31,6 +31,7 @@ Page Object Model (POM) design is used to make this code more readable, maintain
 * Config to kill all the launched browser instances.
 * Config to get screenshots for the failed test cases.
 * Config for BrowserStack.
+* Config for Code Coverage.
 
 
 
