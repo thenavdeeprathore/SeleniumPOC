@@ -23,6 +23,10 @@ Page Object Model (POM) design is used to make this code more readable, maintain
         * Firefox
         * IE
         * Headless Chrome
+* Config for WebDriverManager
+    * OS - {Mac, Win, Linux}
+    * Browsers - {Chrome, Firefox, IE, Edge, Opera, Phantomjs}
+    * Any Browser Versions.
 * Config listeners:
     * ITestListener
     * IInvokedMethodListener

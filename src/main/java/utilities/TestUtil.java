@@ -24,7 +24,7 @@ public class TestUtil extends CommonUtils {
         System.out.println("# Setup.");
         loadProperties(Constants.configPropertiesFilePath);
 //        initializeDrivers(Constants.operatingSystemName, browser.toUpperCase());    //Give browser name through command line
-        initializeDrivers(Constants.operatingSystemName, prop.getProperty("browser").toUpperCase());
+        initializeDriversManager(Constants.operatingSystemName, prop.getProperty("browser").toUpperCase());
         initializePageLoadTimeout(Constants.pageLoadTimeout);
 //        navigateToURL(url); //Give url through command line
         navigateToURL(prop.getProperty("url"));

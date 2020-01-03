@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -367,6 +368,154 @@ public class TestBase extends Constants {
                 break;
             default:
                 System.out.println("Browser name: " + browserType + " is Invalid");
+        }
+    }
+
+    /**
+     * Created by: Navdeep on 04/01/2020.
+     * This function initialize WebDriverManager for any OS, any browsers and any browser versions.
+     *
+     * @param OsType:      Which Operating System you want for are running automation test
+     * @param browserType: Which Browser Type you want for running automation test
+     */
+    public static void initializeDriversManager(String OsType, String browserType) {
+        try {
+            if (OsType.startsWith("WINDOWS")) {
+                System.out.println("Operating System: " + OsType);
+                if ("CHROME".equals(browserType)) {
+                    try {
+                        WebDriverManager.chromedriver().setup();
+                        driver = new ChromeDriver();
+                        System.out.println("Drivers Launched for Chrome");
+                    } catch (Exception e) {
+                        System.out.println("Problem initializing drivers for CHROME; Terminating Execution. " + e);
+                        System.exit(0);
+                    }
+                } else if ("FIREFOX".equals(browserType)) {
+                    try {
+                        WebDriverManager.firefoxdriver().setup();
+                        driver = new FirefoxDriver();
+                        System.out.println("Drivers Launched for Firefox");
+                    } catch (Exception e) {
+                        System.out.println("Problem initializing drivers for FIREFOX; Terminating Execution. " + e);
+                        System.exit(0);
+                    }
+                } else if ("IE".equals(browserType)) {
+                    try {
+                        WebDriverManager.iedriver().setup();
+                        driver = new InternetExplorerDriver();
+                        System.out.println("Drivers Launched for IE");
+                    } catch (Exception e) {
+                        System.out.println("Problem initializing drivers for IE; Terminating Execution. " + e);
+                        System.exit(0);
+                    }
+                } else if ("HEADLESS".equals(browserType)) {
+                    try {
+                        WebDriverManager.chromedriver().setup();
+                        ChromeOptions options = new ChromeOptions();
+                        options.addArguments("window-size=1400,800");
+                        options.addArguments("headless");
+                        driver = new ChromeDriver(options);
+                        System.out.println("Drivers Launched for Headless Chrome");
+                    } catch (Exception e) {
+                        System.out.println("Problem initializing drivers for HEADLESS Chrome; Terminating Execution. " + e);
+                        System.exit(0);
+                    }
+                } else {
+                    System.out.println("Browser name: " + browserType + " is Invalid");
+                }
+            } else if (Constants.operatingSystemName.startsWith("MAC")) {
+                System.out.println("Operating System: " + Constants.operatingSystemName);
+                if ("CHROME".equals(browserType)) {
+                    try {
+                        WebDriverManager.chromedriver().setup();
+                        driver = new ChromeDriver();
+                        System.out.println("Drivers Launched for Chrome");
+                    } catch (Exception e) {
+                        System.out.println("Problem initializing drivers for CHROME; Terminating Execution. " + e);
+                        System.exit(0);
+                    }
+                } else if ("FIREFOX".equals(browserType)) {
+                    try {
+                        WebDriverManager.firefoxdriver().setup();
+                        driver = new FirefoxDriver();
+                        System.out.println("Drivers Launched for Firefox");
+                    } catch (Exception e) {
+                        System.out.println("Problem initializing drivers for FIREFOX; Terminating Execution. " + e);
+                        System.exit(0);
+                    }
+                } else if ("SAFARI".equals(browserType)) {
+                    try {
+                        driver = new SafariDriver();
+                        System.out.println("Drivers Launched for Safari");
+                    } catch (Exception e) {
+                        System.out.println("Problem initializing drivers for Safari; Terminating Execution. " + e);
+                        System.exit(0);
+                    }
+                } else if ("HEADLESS".equals(browserType)) {
+                    WebDriverManager.chromedriver().setup();
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("window-size=1280,960");
+                    options.addArguments("headless");   // options.setHeadless(true);
+                    driver = new ChromeDriver(options);
+                    System.out.println("Drivers Launched for Headless Chrome");
+                } else {
+                    System.out.println("Browser name: " + browserType + " is Invalid");
+                }
+            } else if (OsType.startsWith("LINUX")) {
+                System.out.println("Operating System: " + OsType);
+                if ("CHROME".equals(browserType)) {
+                    try {
+                        WebDriverManager.chromedriver().setup();
+                        driver = new ChromeDriver();
+                        System.out.println("Drivers Launched for Chrome");
+                    } catch (Exception e) {
+                        System.out.println("Problem initializing drivers for CHROME; Terminating Execution. " + e);
+                        System.exit(0);
+                    }
+                } else if ("FIREFOX".equals(browserType)) {
+                    try {
+                        WebDriverManager.firefoxdriver().setup();
+                        driver = new FirefoxDriver();
+                        System.out.println("Drivers Launched for Firefox");
+                    } catch (Exception e) {
+                        System.out.println("Problem initializing drivers for FIREFOX; Terminating Execution. " + e);
+                        System.exit(0);
+                    }
+                } else if ("IE".equals(browserType)) {
+                    try {
+                        WebDriverManager.iedriver().setup();
+                        driver = new InternetExplorerDriver();
+                        System.out.println("Drivers Launched for IE");
+                    } catch (Exception e) {
+                        System.out.println("Problem initializing drivers for IE; Terminating Execution. " + e);
+                        System.exit(0);
+                    }
+                } else if ("HEADLESS".equals(browserType)) {
+                    try {
+                        WebDriverManager.chromedriver().setup();
+                        ChromeOptions options = new ChromeOptions();
+                        options.addArguments("window-size=1400,800");
+                        options.addArguments("headless");
+                        driver = new ChromeDriver(options);
+                        System.out.println("Drivers Launched for Headless Chrome");
+                    } catch (Exception e) {
+                        System.out.println("Problem initializing drivers for HEADLESS Chrome; Terminating Execution. " + e);
+                        System.exit(0);
+                    }
+                } else {
+                    System.out.println("Browser name: " + browserType + " is Invalid");
+                }
+            } else {
+                System.out.println("Currently we don't support the automation for this Operating System: " + Constants.operatingSystemName);
+            }
+            getRemoteWebDriverBrowserCapabilities();
+            javascriptBrowserVersion();
+            deleteAllCookies();
+            maximizeBrowserWindow();
+        } catch (Exception e) {
+            System.out.println("Exception caught while initializing Drivers on OS: " + Constants.operatingSystemName + " for Browser: "
+                    + Constants.browserName + " " + Constants.browserVersion + " " + e);
         }
     }
 
