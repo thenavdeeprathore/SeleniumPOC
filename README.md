@@ -1,5 +1,11 @@
-## Selenium Java TDD Automation POC: www.amazon.com
-This is a web automation framework, implemented using (Java + Selenium Webdriver, TestNG & Maven).
+## Selenium Java TestNG Automation Framework(TDD) POC: www.amazon.com
+This is a web automation framework, implemented using:
+ * Programming Language: **Java**
+ * Test Automation Tool: **Selenium WebDriver**
+ * Test Automation Framework: **TestNG (TDD)**
+ * Build Tool: **Maven**
+ * Version Control: **GIT**
+ * IDE: **IntelliJ IDEA**
 
 Page Object Model (POM) design is used to make this code more readable, maintainable, and reusable.
 

@@ -77,6 +77,8 @@ public class TestBase extends Constants {
                     try {
                         System.setProperty("webdriver.chrome.driver",
                                 Constants.sProjectDir + "/drivers/chromedriver.exe");
+                        // Suppress Console log warnings
+                        System.setProperty("webdriver.chrome.silentOutput", "true");
                         Map<String, Object> prefs = new HashMap<String, Object>();
                         prefs.put("profile.default_content_setting_values.notifications", 2);
                         prefs.put("credentials_enable_service", false);
@@ -95,6 +97,8 @@ public class TestBase extends Constants {
                     try {
                         System.setProperty("webdriver.gecko.driver",
                                 Constants.sProjectDir + "/drivers/geckodriver.exe");
+                        // Suppress Console log warnings
+                        System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"null");
                         driver = new FirefoxDriver();
                         System.out.println("Drivers Launched for Firefox");
                     } catch (Exception e) {
@@ -133,6 +137,8 @@ public class TestBase extends Constants {
                     try {
                         System.setProperty("webdriver.chrome.driver",
                                 Constants.sProjectDir + "/drivers/chromedriver");
+                        // Suppress Console log warnings
+                        System.setProperty("webdriver.chrome.silentOutput", "true");
                         Map<String, Object> prefs = new HashMap<String, Object>();
                         prefs.put("profile.default_content_setting_values.notifications", 2);
                         prefs.put("credentials_enable_service", false);
@@ -151,6 +157,8 @@ public class TestBase extends Constants {
                     try {
                         System.setProperty("webdriver.gecko.driver",
                                 Constants.sProjectDir + "/drivers/geckodriver");
+                        // Suppress Console log warnings
+                        System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"null");
                         driver = new FirefoxDriver();
                         System.out.println("Drivers Launched for Firefox");
                     } catch (Exception e) {
@@ -385,6 +393,8 @@ public class TestBase extends Constants {
                 if ("CHROME".equals(browserType)) {
                     try {
                         WebDriverManager.chromedriver().setup();
+                        // Suppress Console log warnings
+                        System.setProperty("webdriver.chrome.silentOutput", "true");
                         driver = new ChromeDriver();
                         System.out.println("Drivers Launched for Chrome");
                     } catch (Exception e) {
@@ -394,6 +404,8 @@ public class TestBase extends Constants {
                 } else if ("FIREFOX".equals(browserType)) {
                     try {
                         WebDriverManager.firefoxdriver().setup();
+                        // Suppress Console log warnings
+                        System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"null");
                         driver = new FirefoxDriver();
                         System.out.println("Drivers Launched for Firefox");
                     } catch (Exception e) {
@@ -429,6 +441,8 @@ public class TestBase extends Constants {
                 if ("CHROME".equals(browserType)) {
                     try {
                         WebDriverManager.chromedriver().setup();
+                        // Suppress Console log warnings
+                        System.setProperty("webdriver.chrome.silentOutput", "true");
                         driver = new ChromeDriver();
                         System.out.println("Drivers Launched for Chrome");
                     } catch (Exception e) {
@@ -438,6 +452,8 @@ public class TestBase extends Constants {
                 } else if ("FIREFOX".equals(browserType)) {
                     try {
                         WebDriverManager.firefoxdriver().setup();
+                        // Suppress Console log warnings
+                        System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"null");
                         driver = new FirefoxDriver();
                         System.out.println("Drivers Launched for Firefox");
                     } catch (Exception e) {
@@ -467,6 +483,8 @@ public class TestBase extends Constants {
                 if ("CHROME".equals(browserType)) {
                     try {
                         WebDriverManager.chromedriver().setup();
+                        // Suppress Console log warnings
+                        System.setProperty("webdriver.chrome.silentOutput", "true");
                         driver = new ChromeDriver();
                         System.out.println("Drivers Launched for Chrome");
                     } catch (Exception e) {
@@ -476,6 +494,8 @@ public class TestBase extends Constants {
                 } else if ("FIREFOX".equals(browserType)) {
                     try {
                         WebDriverManager.firefoxdriver().setup();
+                        // Suppress Console log warnings
+                        System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"null");
                         driver = new FirefoxDriver();
                         System.out.println("Drivers Launched for Firefox");
                     } catch (Exception e) {

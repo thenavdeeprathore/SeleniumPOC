@@ -14,8 +14,8 @@
                 <methods>
                     <include name="testHomeTitle" />
                     <include name="testUrlProtocol" />
-                    <include name="testNavigateToSignIn" />
-                    <include name="testSignIn" />
+                    <!--<include name="testNavigateToSignIn" />-->
+                    <!--<include name="testSignIn" />-->
                 </methods>
             </class>
 
