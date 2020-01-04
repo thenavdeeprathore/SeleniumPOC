@@ -33,6 +33,7 @@ Page Object Model (POM) design is used to make this code more readable, maintain
     * OS - {Mac, Win, Linux}
     * Browsers - {Chrome, Firefox, IE, Edge, Opera, Phantomjs}
     * Any Browser Versions.
+* Config to suppress console log warnings.
 * Config listeners:
     * ITestListener
     * IInvokedMethodListener
@@ -42,6 +43,9 @@ Page Object Model (POM) design is used to make this code more readable, maintain
 * Config to get screenshots for the failed test cases.
 * Config for BrowserStack.
 * Config for Code Coverage using Jacoco.
+* Additional Features:
+    * Selenium 4 new locator feature: [Relative Locators](src/main/java/selenium4concepts/RelativeLocatorConcept.java)
+    * Generate random unique test data for automation using [Java Faker](https://github.com/DiUS/java-faker)
 
 ## Amazon Site Test Repository:
 * [Login](src/test/java/authentication/Login.java)
