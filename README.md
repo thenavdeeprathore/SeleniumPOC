@@ -62,3 +62,39 @@ Page Object Model (POM) design is used to make this code more readable, maintain
     * `# view test execution report at ‘report/QAReportSmoke.html’`
     * `# view code coverage report at ‘target/site/jacoco/index.html’`
 
+## Steps to collaborate with this project:
+* Create a fork on github to the **thenavdeeprathore/SeleniumPOC** repo.
+* Clone the fork to your local machine:
+    * `git clone http://github.com/(userName)/SeleniumPOC.git`
+* `cd SeleniumPOC`
+* Add a remote to the forked repo to keep your fork up-to-date:
+    * `git remote add upstream https://github.com/thenavdeeprathore/SeleniumPOC.git`
+* Verify new remote named upstream:
+    * `git remote -v`
+* To update fork with latest changes:
+    * `git fetch upstream`
+    * `git merge upstream/master`
+* Checkout the master branch
+    * `git checkout master`
+* `git branch branchName`
+* `git checkout branchName`
+* Make your changes and commit them
+* `git status`
+* `git add .`
+* `git commit -m "initial commit"`
+
+* `git fetch upstream`
+* `git merge upstream/master`
+* `git rebase master`
+
+* `git push origin branchName`
+
+* `git push --set-upstream origin {branchName}`
+
+* A pull request will be created on GitHub, send a link to the reviewer for approval.
+* Click rebase and merge the code.
+* Delete remote branch
+
+* `git checkout master`
+* `git branch -d branchName`
+* `git push`
