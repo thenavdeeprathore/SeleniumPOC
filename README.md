@@ -1,7 +1,7 @@
 ## Selenium Java TestNG Automation Framework(TDD) POC: www.amazon.com
 This is a web automation framework, implemented using:
  * Programming Language: **Java**
- * Test Automation Tool: **Selenium WebDriver**
+ * Test Automation Tool: **Selenium WebDriver {version 4.0.0-alpha-3}**
  * Test Automation Framework: **TestNG (TDD)**
  * Build Tool: **Maven**
  * Version Control: **GIT**
