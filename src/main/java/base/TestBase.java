@@ -390,7 +390,7 @@ public class TestBase extends Constants {
         try {
             if (OsType.startsWith("WINDOWS")) {
                 System.out.println("Operating System: " + OsType);
-                if ("CHROME".equals(browserType)) {
+                if ("CHROME".equalsIgnoreCase(browserType)) {
                     try {
                         WebDriverManager.chromedriver().setup();
                         // Suppress Console log warnings
@@ -401,7 +401,7 @@ public class TestBase extends Constants {
                         System.out.println("Problem initializing drivers for CHROME; Terminating Execution. " + e);
                         System.exit(0);
                     }
-                } else if ("FIREFOX".equals(browserType)) {
+                } else if ("FIREFOX".equalsIgnoreCase(browserType)) {
                     try {
                         WebDriverManager.firefoxdriver().setup();
                         // Suppress Console log warnings
@@ -412,7 +412,7 @@ public class TestBase extends Constants {
                         System.out.println("Problem initializing drivers for FIREFOX; Terminating Execution. " + e);
                         System.exit(0);
                     }
-                } else if ("IE".equals(browserType)) {
+                } else if ("IE".equalsIgnoreCase(browserType)) {
                     try {
                         WebDriverManager.iedriver().setup();
                         driver = new InternetExplorerDriver();
@@ -421,7 +421,7 @@ public class TestBase extends Constants {
                         System.out.println("Problem initializing drivers for IE; Terminating Execution. " + e);
                         System.exit(0);
                     }
-                } else if ("HEADLESS".equals(browserType)) {
+                } else if ("HEADLESS".equalsIgnoreCase(browserType)) {
                     try {
                         WebDriverManager.chromedriver().setup();
                         ChromeOptions options = new ChromeOptions();
@@ -438,7 +438,7 @@ public class TestBase extends Constants {
                 }
             } else if (Constants.operatingSystemName.startsWith("MAC")) {
                 System.out.println("Operating System: " + Constants.operatingSystemName);
-                if ("CHROME".equals(browserType)) {
+                if ("CHROME".equalsIgnoreCase(browserType)) {
                     try {
                         WebDriverManager.chromedriver().setup();
                         // Suppress Console log warnings
@@ -449,7 +449,7 @@ public class TestBase extends Constants {
                         System.out.println("Problem initializing drivers for CHROME; Terminating Execution. " + e);
                         System.exit(0);
                     }
-                } else if ("FIREFOX".equals(browserType)) {
+                } else if ("FIREFOX".equalsIgnoreCase(browserType)) {
                     try {
                         WebDriverManager.firefoxdriver().setup();
                         // Suppress Console log warnings
@@ -460,7 +460,7 @@ public class TestBase extends Constants {
                         System.out.println("Problem initializing drivers for FIREFOX; Terminating Execution. " + e);
                         System.exit(0);
                     }
-                } else if ("SAFARI".equals(browserType)) {
+                } else if ("SAFARI".equalsIgnoreCase(browserType)) {
                     try {
                         driver = new SafariDriver();
                         System.out.println("Drivers Launched for Safari");
@@ -468,7 +468,7 @@ public class TestBase extends Constants {
                         System.out.println("Problem initializing drivers for Safari; Terminating Execution. " + e);
                         System.exit(0);
                     }
-                } else if ("HEADLESS".equals(browserType)) {
+                } else if ("HEADLESS".equalsIgnoreCase(browserType)) {
                     WebDriverManager.chromedriver().setup();
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("window-size=1280,960");
@@ -480,7 +480,7 @@ public class TestBase extends Constants {
                 }
             } else if (OsType.startsWith("LINUX")) {
                 System.out.println("Operating System: " + OsType);
-                if ("CHROME".equals(browserType)) {
+                if ("CHROME".equalsIgnoreCase(browserType)) {
                     try {
                         WebDriverManager.chromedriver().setup();
                         // Suppress Console log warnings
@@ -491,7 +491,7 @@ public class TestBase extends Constants {
                         System.out.println("Problem initializing drivers for CHROME; Terminating Execution. " + e);
                         System.exit(0);
                     }
-                } else if ("FIREFOX".equals(browserType)) {
+                } else if ("FIREFOX".equalsIgnoreCase(browserType)) {
                     try {
                         WebDriverManager.firefoxdriver().setup();
                         // Suppress Console log warnings
@@ -502,7 +502,7 @@ public class TestBase extends Constants {
                         System.out.println("Problem initializing drivers for FIREFOX; Terminating Execution. " + e);
                         System.exit(0);
                     }
-                } else if ("IE".equals(browserType)) {
+                } else if ("IE".equalsIgnoreCase(browserType)) {
                     try {
                         WebDriverManager.iedriver().setup();
                         driver = new InternetExplorerDriver();
@@ -511,7 +511,7 @@ public class TestBase extends Constants {
                         System.out.println("Problem initializing drivers for IE; Terminating Execution. " + e);
                         System.exit(0);
                     }
-                } else if ("HEADLESS".equals(browserType)) {
+                } else if ("HEADLESS".equalsIgnoreCase(browserType)) {
                     try {
                         WebDriverManager.chromedriver().setup();
                         ChromeOptions options = new ChromeOptions();
